@@ -17,7 +17,7 @@
 
             var app = serviceProvider.GetService<IApp>();
 
-            app.Start();
+            app.Run();
         }
     }
 }

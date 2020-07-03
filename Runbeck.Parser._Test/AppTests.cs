@@ -1,3 +1,5 @@
+using System;
+
 namespace Runbeck.Parser._Test
 {
     using FluentAssertions;

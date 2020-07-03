@@ -10,7 +10,7 @@
 
     public interface IApp
     {
-        void Start();
+        void Run();
         IEnumerable<string> GetFileLines();
     }
 
@@ -23,8 +23,12 @@
         public const string FILE_EMPTY_MSG = "File empty.  Try again? (y/n)";
         public const string UNEXPECTED_EXCEPTION_MSG = "Unexpected exception occurred.  Program is exiting.";
         public const string EXITING_APPLICATION_MSG = "Exiting applicion.";
-        public const string GET_FILE_TYPE_MSG =
-            "Is the file format CSV (comma seperated values) or TSV (tab seperated values)? (c/t)";
+        public const string GET_FILE_TYPE_MSG = "Is the file format CSV (comma seperated values) or TSV (tab seperated values)? (c/t)";
+        public const string FILE_TYPE_INVALID_SELECTION_MSG = "Invalid selection.Please try again.";
+        public const string HOW_MANY_FIELDS_MSG = "How many fields should each record contain?";
+        public const string FIELD_COUNT_INVALID_INPUT_MSG = "Invalid input.  Please try again.";
+        public const string GOOD_RECORD_COUNT_MSG = "Good record count: ";
+        public const string BAD_RECORD_COUNT_MSG = "Bad record count: ";
 
         public App(IUserInterface userInterface, IOutputWriter outputWriter)
         {
@@ -32,7 +36,7 @@
             _outputWriter = outputWriter;
         }
 
-        public void Start()
+        public void Run()
         {
             var lines = GetFileLines();
             if (lines == null)
@@ -42,9 +46,31 @@
             }
 
             var fileType = GetFileType();
-            var parseResult = ContentParser.Parse(fileType, 3, lines);
+            var fieldCount = GetFieldCount();
+            var parseResult = ContentParser.Parse(fileType, fieldCount, lines);
+
+            _userInterface.WriteLine(GOOD_RECORD_COUNT_MSG + parseResult.GoodLines.Count);
+            _userInterface.WriteLine(BAD_RECORD_COUNT_MSG + parseResult.BadLines.Count);
 
             _outputWriter.WriteOutput(parseResult);
+        }
+
+        public int GetFieldCount()
+        {
+            
+            while (true)
+            {
+                _userInterface.WriteLine(HOW_MANY_FIELDS_MSG);
+
+                var response = _userInterface.ReadLine();
+                var success = int.TryParse(response, out int result);
+                if (success)
+                {
+                    return result;
+                }
+
+                _userInterface.WriteLine(FIELD_COUNT_INVALID_INPUT_MSG);
+            }
         }
 
         public FileType GetFileType()
@@ -53,6 +79,7 @@
             {
                 _userInterface.WriteLine(GET_FILE_TYPE_MSG);
                 var response = Console.ReadKey().Key;
+                _userInterface.WriteLine("\n");
                 if (response == ConsoleKey.C)
                 {
                     return FileType.Csv;
@@ -61,11 +88,10 @@
                 {
                     return FileType.Tsv;
                 }
-                _userInterface.WriteLine("Invalid selection. Please try again.");
+                _userInterface.WriteLine(FILE_TYPE_INVALID_SELECTION_MSG);
             }
         }
-        
-
+      
         /// <returns>Contents of file or null to signal to end appliation.</returns>
         public IEnumerable<string> GetFileLines()
         {
