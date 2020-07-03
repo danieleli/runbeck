@@ -1,10 +1,14 @@
-﻿namespace Runbeck.Parser._Test
-{
-    using FluentAssertions;
-    using Runbeck.Parser.Parsing;
-    using Xunit;
-    using Xunit.Abstractions;
+﻿#region Usings
 
+using FluentAssertions;
+using Runbeck.Parser.Parsing;
+using Xunit;
+using Xunit.Abstractions;
+
+#endregion
+
+namespace Runbeck.Parser._Test
+{
     public class ContentParserTests
     {
         private readonly ITestOutputHelper _output;
@@ -17,8 +21,8 @@
         [Fact]
         public void OneGoodOneBad()
         {
-            var fileType = FileType.Csv;
-            var content = new[] {"head1,head2,head3", "line1-1,line1-2,line1-3", ""};
+            var fileType   = FileType.Csv;
+            var content    = new[] {"head1,head2,head3", "line1-1,line1-2,line1-3", ""};
             var fieldCount = 3;
 
             var results = ContentParser.Parse(fileType, fieldCount, content);

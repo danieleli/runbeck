@@ -1,14 +1,18 @@
-﻿namespace Runbeck.Parser.Parsing
-{
-    using System;
-    using System.Collections.Generic;
+﻿#region Usings
 
+using System;
+using System.Collections.Generic;
+
+#endregion
+
+namespace Runbeck.Parser.Parsing
+{
     public class ContentParser
     {
         public static ParseResult Parse(FileType fileType, int fieldCount, IEnumerable<string> content)
         {
-            var seperator = GetSeperator(fileType);
-            var rtn = new ParseResult();
+            var seperator   = GetSeperator(fileType);
+            var rtn         = new ParseResult();
             var isHeaderRow = true;
 
             foreach (var line in content)
@@ -39,10 +43,8 @@
             {
                 return ",".ToCharArray();
             }
-            else
-            {
-                return new char[] { Convert.ToChar(9) };
-            }
+
+            return new[] {Convert.ToChar(9)};
         }
     }
 }

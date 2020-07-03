@@ -1,7 +1,11 @@
-﻿namespace Runbeck.Parser.UI
-{
-    using System;
+﻿#region Usings
 
+using System;
+
+#endregion
+
+namespace Runbeck.Parser.UI
+{
     public class ConsoleUserInterface : IUserInterface
     {
         public void WriteLine(string s)

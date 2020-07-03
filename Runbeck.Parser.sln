@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runbeck.Parser", "Runbeck.Parser\Runbeck.Parser.csproj", "{C1B3A2C7-8F6A-4E8C-9C9D-AC0911E5DE61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runbeck.Parser", "Runbeck.Parser\Runbeck.Parser.csproj", "{C1B3A2C7-8F6A-4E8C-9C9D-AC0911E5DE61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runbeck.Parser._Test", "Runbeck.Parser._Test\Runbeck.Parser._Test.csproj", "{00C1845A-3D3C-467F-858F-9024BBE7F665}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Runbeck.Parser._Test", "Runbeck.Parser._Test\Runbeck.Parser._Test.csproj", "{00C1845A-3D3C-467F-858F-9024BBE7F665}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3E44881-FABB-4BA8-A3D9-0B5BB886F02E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

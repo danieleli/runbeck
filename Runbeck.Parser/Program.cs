@@ -1,9 +1,13 @@
-﻿namespace Runbeck.Parser
-{
-    using Microsoft.Extensions.DependencyInjection;
-    using Runbeck.Parser.Output;
-    using Runbeck.Parser.UI;
+﻿#region Usings
 
+using Microsoft.Extensions.DependencyInjection;
+using Runbeck.Parser.Output;
+using Runbeck.Parser.UI;
+
+#endregion
+
+namespace Runbeck.Parser
+{
     internal class Program
     {
         private static void Main(string[] args)
