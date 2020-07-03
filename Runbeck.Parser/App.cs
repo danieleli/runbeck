@@ -23,6 +23,8 @@
         public const string FILE_EMPTY_MSG = "File empty.  Try again? (y/n)";
         public const string UNEXPECTED_EXCEPTION_MSG = "Unexpected exception occurred.  Program is exiting.";
         public const string EXITING_APPLICATION_MSG = "Exiting applicion.";
+        public const string GET_FILE_TYPE_MSG =
+            "Is the file format CSV (comma seperated values) or TSV (tab seperated values)? (c/t)";
 
         public App(IUserInterface userInterface, IOutputWriter outputWriter)
         {
@@ -36,13 +38,32 @@
             if (lines == null)
             {
                 _userInterface.WriteLine(EXITING_APPLICATION_MSG);
+                return;
             }
 
-            var parseResult = ContentParser.Parse(FileType.Csv, 3, lines);
+            var fileType = GetFileType();
+            var parseResult = ContentParser.Parse(fileType, 3, lines);
 
             _outputWriter.WriteOutput(parseResult);
         }
 
+        public FileType GetFileType()
+        {
+            while (true)
+            {
+                _userInterface.WriteLine(GET_FILE_TYPE_MSG);
+                var response = Console.ReadKey().Key;
+                if (response == ConsoleKey.C)
+                {
+                    return FileType.Csv;
+                }
+                if (response == ConsoleKey.T)
+                {
+                    return FileType.Tsv;
+                }
+                _userInterface.WriteLine("Invalid selection. Please try again.");
+            }
+        }
         
 
         /// <returns>Contents of file or null to signal to end appliation.</returns>
@@ -80,7 +101,6 @@
                     var response = _userInterface.ReadLine();
                     if (!response.ToUpper().Equals("Y"))
                     {
-                        _userInterface.WriteLine(EXITING_APPLICATION_MSG);
                         return null;
                     }
                 }

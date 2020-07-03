@@ -13,5 +13,10 @@
         {
             return Console.ReadLine();
         }
+
+        public ConsoleKey ReadKey()
+        {
+            return Console.ReadKey().Key;
+        }
     }
 }
